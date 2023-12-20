@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class PlayerController_2 : MonoBehaviour
 {
-    private int speed = 5;
+    private int speed = 15;
     private float horizontalInput;
     private float verticalInput;
     private float bottomRange = -1.75f;
     private float upRange = 16.5f;
-    private float xRange = 11f;
+    private float xRange = 20f;
     public GameObject food;
 
     private void Update()
@@ -40,7 +40,7 @@ public class PlayerController_2 : MonoBehaviour
         //space bar
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Instantiate(food, new Vector3(transform.position.x, transform.position.y + 2, transform.position.z + 0.5f),food.transform.rotation);
+            Instantiate(food, new Vector3(transform.position.x, transform.position.y+1, transform.position.z + 2),food.transform.rotation);
         }
     }
 }
