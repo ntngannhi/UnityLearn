@@ -7,7 +7,15 @@ public class DetectCollision_2 : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        Destroy(gameObject);
-        Destroy(other.gameObject);
+        if (other.CompareTag("Player"))
+        {
+            Debug.Log("GameOver");
+        }
+        else
+        { 
+           
+           Destroy(gameObject);
+           Destroy(other.gameObject); 
+        }
     }
 }
