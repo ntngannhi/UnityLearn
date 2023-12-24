@@ -21,7 +21,7 @@
             {
                 "type": "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
                 "key": "buildOutputDirList",
-                "value": "{\"m_Value\":\"/Users/nntgam/UnityProject/UnityLearn_Unit1_PlayerControl/Unit1_CarRun;;;;;;;;;\"}"
+                "value": "{\"m_Value\":\"/Users/nntgam/UnityProject/UnityLearn/Unit2_AnimalHunger;/Users/nntgam/UnityProject/UnityLearn_Unit1_PlayerControl/Unit1_CarRun;;;;;;;;\"}"
             }
         ]
     }
