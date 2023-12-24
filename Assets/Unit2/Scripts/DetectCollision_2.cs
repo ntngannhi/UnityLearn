@@ -5,17 +5,20 @@ using UnityEngine;
 
 public class DetectCollision_2 : MonoBehaviour
 {
+    private GameManager_2 gameManager;
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager_2>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("GameOver");
+            gameManager.DecreaseLives(1);
         }
         else
         { 
-           
-           Destroy(gameObject);
-           Destroy(other.gameObject); 
+            gameObject.GetComponent<AnimalHunger_2>().FeedAnimal(1);
         }
     }
 }
