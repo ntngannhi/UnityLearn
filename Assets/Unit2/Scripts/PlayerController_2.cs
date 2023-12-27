@@ -2,8 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 
-public class PlayerController_2 : MonoBehaviour
+public class PlayerController_2 : MonoBehaviour, IUnit
 {
     private int speed = 15;
     private float horizontalInput;
@@ -12,6 +13,13 @@ public class PlayerController_2 : MonoBehaviour
     private float upRange = 16.5f;
     private float xRange = 20f;
     public GameObject food;
+    
+    private GameManager_2 gameManager;
+
+    private void Start()
+    {
+        gameManager = GameObject.Find("GameManager").GetComponent<GameManager_2>();
+    }
 
     private void Update()
     {
@@ -42,6 +50,25 @@ public class PlayerController_2 : MonoBehaviour
         {
             Instantiate(food, new Vector3(transform.position.x, transform.position.y+1, transform.position.z + 2),food.transform.rotation);
         }
+    }
+
+    public Vector3 GetPosition()
+    {
+        return transform.position;
+    }
+
+    public void SetPosition(Vector3 position)
+    {
+        transform.position = position;
+    }
+
+    public int GetScoreAmount()
+    {
+        return gameManager.scores;
+    }
+    public void SetScoreAmount(int scoreAmount)
+    {
+        gameManager.scores = scoreAmount;
     }
     
 }

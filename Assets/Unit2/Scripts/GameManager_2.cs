@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager_2 : MonoBehaviour
 {
    private int lives = 3;
-   private int scores = 0;
+   public int scores = 0;
 
    public void DecreaseLives(int value)
    {

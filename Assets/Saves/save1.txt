@@ -1,0 +1,1 @@
+{"scoreAmount":0,"playerPosition":{"x":0.0,"y":0.0,"z":4.81699800491333}}
