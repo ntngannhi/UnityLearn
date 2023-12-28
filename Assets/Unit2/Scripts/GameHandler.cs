@@ -55,6 +55,7 @@ public class GameHandler : MonoBehaviour
       
       if(saveString !=null)
       {
+         //SaveObject = BoardSaved.cs
          SaveObject saveObject = JsonUtility.FromJson<SaveObject>(saveString);
          unit.SetPosition(saveObject.playerPosition);
          unit.SetScoreAmount(saveObject.scoreAmount);

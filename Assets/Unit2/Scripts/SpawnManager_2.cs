@@ -1,11 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
+
+[System.Serializable]
+public class AnimalData
+{
+    public string animalPrefabName;
+    public Vector3 position;
+    public Quaternion rotation;
+}
 
 public class SpawnManager_2 : MonoBehaviour
 {
     public GameObject[] animalPrefabs;
+    private List<AnimalData> animalDataList = new List<AnimalData>();
 
+    
     private int upperRange = 20;
     private int xRange = 22;
     private int xMax = 25;
@@ -25,26 +36,42 @@ public class SpawnManager_2 : MonoBehaviour
 
     void SpawnRandomAnimal()
     {
-        int index = Random.Range(0, animalPrefabs.Length);
-        int xRandom = Random.Range(-xRange, xRange);
-        Instantiate(animalPrefabs[index], new Vector3(xRandom, 0, upperRange),
-                animalPrefabs[index].transform.rotation);
+        SpawnAnimal(180, Random.Range(-xRange, xRange), upperRange);
     }
 
     void SpawnLeftRandomAnimal()
     {
-        Vector3 rotation = new Vector3(0, 90, 0);
-        int index = Random.Range(0, animalPrefabs.Length);
-        int zRandom = Random.Range(zDown, zUpper);
-        Instantiate(animalPrefabs[index], new Vector3(-xMax, 0, zRandom),
-            Quaternion.Euler(rotation));
+        SpawnAnimal(90, -xMax, Random.Range(zDown, zUpper));
     }
+
     void SpawnRightRandomAnimal()
     {
-        Vector3 rotation = new Vector3(0, -90, 0);
+        SpawnAnimal(-90, xMax, Random.Range(zDown, zUpper));
+    }
+    void SpawnAnimal(float yRotation, float xPosition, float zPosition)
+    {
         int index = Random.Range(0, animalPrefabs.Length);
-        int zRandom = Random.Range(zDown, zUpper);
-        Instantiate(animalPrefabs[index], new Vector3(xMax, 0, zRandom),
-            Quaternion.Euler(rotation));
+        Vector3 spawnPosition = new Vector3(xPosition, 0, zPosition);
+        Quaternion spawnRotation = Quaternion.Euler(0, yRotation, 0);
+
+        Instantiate(animalPrefabs[index], spawnPosition, spawnRotation);
+        // Lưu thông tin vào danh sách
+        AnimalData animalData = new AnimalData
+        {
+            animalPrefabName = animalPrefabs[index].name,
+            position = spawnPosition,
+            rotation = spawnRotation
+        };
+        animalDataList.Add(animalData);
+
+        // Lưu danh sách vào file JSON
+        SaveAnimalDataToJson();
+    }
+
+    void SaveAnimalDataToJson()
+    {
+        string jsonPath = Application.dataPath + "/animalData.json";
+        string jsonData = JsonUtility.ToJson(animalDataList, true);
+        File.WriteAllText(jsonPath, jsonData);
     }
 }
